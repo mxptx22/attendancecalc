@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/attendancecalc/static/css/main.f4b5e5cc.css",
+    "main.js": "/attendancecalc/static/js/main.786759b4.js",
+    "index.html": "/attendancecalc/index.html",
+    "main.f4b5e5cc.css.map": "/attendancecalc/static/css/main.f4b5e5cc.css.map",
+    "main.786759b4.js.map": "/attendancecalc/static/js/main.786759b4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4b5e5cc.css",
+    "static/js/main.786759b4.js"
+  ]
+}
