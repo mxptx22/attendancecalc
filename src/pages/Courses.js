@@ -56,8 +56,12 @@ function Courses() {
     
     }, [])
 
+    function refreshPage() {
+    window.location.reload(false);
+  }
+    
     useEffect(() => {
-        if (courses.length !== 0) {saveCourse()}
+        if (courses.length !== 0) { saveCourse()}
     
     }, [courses])
     
