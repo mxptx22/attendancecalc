@@ -1,15 +1,8 @@
 body{
-  /* background-color:rgb(255, 255, 255); */
-  background-color: aqua;
+  background-color:rgb(255, 255, 255);
   color: rgb(41, 41, 41);
   overflow: hidden;
   font-size: 1rem;
-}
-
-#root {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
 
 h1 {
