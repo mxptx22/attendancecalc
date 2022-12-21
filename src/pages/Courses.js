@@ -135,26 +135,6 @@ function Courses() {
         </div>
       </div>
 
-      {/* <div className="configBar">
-        <button
-          onClick={() => {
-            setScreenPosition("null");
-            setScreen("OneNew");
-          }}
-          className="configBarItem configButton"
-          style={{ backgroundColor: "lightseagreen" }}>
-          Add
-        </button>
-        <div className="configDesc">Save for Later</div>
-        <div
-          onClick={() => {
-            savingforLater();
-          }}
-          className="configBarItem sliderBar"
-          style={{ justifyContent: savingSliderDefault }}>
-          <div className="sliderButton" ref={coursesCongifBar}></div>
-        </div>
-      </div> */}
       <div
         id="courses-container"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-6">

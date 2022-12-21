@@ -118,6 +118,8 @@ function CoursePreview() {
   const countingAttendance = () => {
     if (countingTotal() !== 0) {
       return Math.round((countingPresent() / countingTotal()) * 100) + "%";
+    } else {
+      return "–%";
     }
   };
 
@@ -181,7 +183,7 @@ function CoursePreview() {
         <div id="list" className="w-full">
           <AttendanceList />
         </div>
-        <div id="stats" className="w-1/3">
+        <div id="stats" className="w-full md:w-1/3">
           <AttendanceStats />
         </div>
       </div>
@@ -223,30 +225,60 @@ function CoursePreview() {
   }
 
   function AttendanceStats() {
+    const textColorStyle = { color: newCourseColour };
+    const bgColorStyle = { backgroundColor: newCourseColour };
+
     return (
-      <>
-        <div class="bigAttendance" style={{ color: newCourseColour }}>
+      <div className="w-full flex items-center md:items-start flex-col gap-4 mt-3 md:mt-0">
+        {/* HERE Percentage */}
+        <div
+          id="percentage"
+          style={textColorStyle}
+          className="text-5xl md:text-7xl font-semibold md:pl-1">
           {countingAttendance()}
         </div>
-        <div class="mediumAttendance">
-          <span style={{ color: newCourseColour, fontWeight: "800" }}>
-            {countingPresent()}
-          </span>{" "}
-          Marked Present
+        <div class="flex w-full justify-between md:gap-3 md:flex-col md:items-start">
+          {/* HERE Present */}
+          <div
+            id="present"
+            className="flex flex-col md:flex-row gap-3 items-center md:items-start md:justify-center">
+            <div
+              style={bgColorStyle}
+              className="text- flex items-center justify-center w-7 aspect-square whitespace-nowrap overflow-hidden">
+              <div>{countingPresent()}</div>
+            </div>
+            <div className="uppercase font-thin tracking-wider text-gray-400 text-xs md:text-lg">
+              In Class
+            </div>
+          </div>
+          {/* HERE Absent */}
+          <div
+            id="absent"
+            className="flex flex-col md:flex-row gap-3 items-center md:items-start md:justify-center">
+            <div
+              style={bgColorStyle}
+              className="text- flex items-center justify-center w-7 aspect-square whitespace-nowrap overflow-hidden">
+              <div>{countingAbsent()}</div>
+            </div>
+            <div className="uppercase font-thin tracking-wider text-gray-400 text-xs md:text-lg">
+              Absences
+            </div>
+          </div>
+          {/* HERE Total */}
+          <div
+            id="absent"
+            className="flex flex-col md:flex-row gap-3 items-center md:items-start md:justify-center">
+            <div
+              style={bgColorStyle}
+              className="text- flex items-center justify-center w-7 aspect-square whitespace-nowrap overflow-hidden">
+              <div>{countingTotal()}</div>
+            </div>
+            <div className="uppercase font-thin tracking-wider text-gray-400 text-xs md:text-lg">
+              Total
+            </div>
+          </div>
         </div>
-        <div class="mediumAttendance">
-          <span style={{ color: newCourseColour, fontWeight: "800" }}>
-            {countingAbsent()}
-          </span>{" "}
-          Marked Absent
-        </div>
-        <div class="mediumAttendance">
-          <span style={{ color: newCourseColour, fontWeight: "800" }}>
-            {countingTotal()}
-          </span>{" "}
-          in Total
-        </div>
-      </>
+      </div>
     );
   }
 }

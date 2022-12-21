@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import PageContext from "../PageContext";
 import { BiAddToQueue } from "react-icons/bi";
-import { MdOutlineCancelPresentation } from "react-icons/md";
 import { IoMdExit } from "react-icons/io";
 
 function NewRecurring({ activities }) {
@@ -109,13 +108,6 @@ function NewRecurring({ activities }) {
             className="yes-button yes-button-gray">
             <IoMdExit className="" />
           </button>
-          {/* <button
-            onClick={() => {
-              recurrenceCalc();
-            }}
-            className="yes-button yes-button-green">
-            <BiAddToQueue className="" />
-          </button> */}
         </div>
       </div>
       <div className="w-full text-center mt-12">
