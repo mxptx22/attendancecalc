@@ -1,20 +1,16 @@
-body{
-  background-color:rgb(255, 255, 255);
+body {
+  background-color: rgb(255, 255, 255);
   color: rgb(41, 41, 41);
   overflow: hidden;
   font-size: 1rem;
 }
 
-h1 {
-  margin-top: 0 !important;
-}
-
 .separator {
-  height:10px;
+  height: 10px;
 }
 
 #ceilling {
-  margin-top:20vh;
+  margin-top: 20vh;
 }
 
 #mainWindowContainer {
@@ -22,35 +18,34 @@ h1 {
 }
 
 .icon {
- height:3vh;
- background-color: rgb(232, 232, 232);
- width: max(170px,10vw);
- margin-left: auto;
- margin-right: auto;
- border-radius: 10px 10px 0 0;
- overflow: visible;
- position: relative;
- display: flex;
- z-index: 2;
- box-shadow: 0 20px 17px rgba(0, 0, 0, 0.33) inset;
- justify-content: center;
-
+  height: 3vh;
+  background-color: rgb(232, 232, 232);
+  width: max(170px, 10vw);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px 10px 0 0;
+  overflow: visible;
+  position: relative;
+  display: flex;
+  z-index: 2;
+  box-shadow: 0 20px 17px rgba(0, 0, 0, 0.33) inset;
+  justify-content: center;
 }
 
 .iconGraphics {
   font-size: max(20vh, 10vw);
   position: absolute;
-  bottom:0;
+  bottom: 0;
   line-height: 0.7;
 }
 
 .window {
   background-color: rgb(245, 245, 245);
   overflow: auto;
-  padding:40px 40px;
+  padding: 40px 40px;
   box-sizing: border-box;
   border-radius: 50px 50px 0 0;
-  height:76vh;
+  height: 76vh;
   box-shadow: 0 -47px 100px rgb(170, 170, 170);
 }
 
@@ -64,19 +59,19 @@ h1 {
 
 .configBarItem {
   display: inline-block;
-  height:40px;
+  height: 40px;
   transition: all 2s;
 }
 
 .sliderBar {
-  background-color:rgb(186, 186, 186);
+  background-color: rgb(186, 186, 186);
   width: 80px;
   display: flex;
   border-radius: 40px;
   display: flex;
   transition: all 2s;
   align-content: center;
-  box-shadow:0 0 18px inset;
+  box-shadow: 0 0 18px inset;
 }
 
 .sliderButton {
@@ -86,11 +81,10 @@ h1 {
   height: 40px;
   border-radius: 40px;
   box-shadow: 0 0 4px;
-  
 }
 
 .configButton {
-  min-height:40px;
+  min-height: 40px;
   border-radius: 5px;
   font-weight: 800;
   font-size: 1.2rem;
@@ -104,92 +98,30 @@ h1 {
 }
 
 .configDesc {
-  max-width:60px;
-}
-
-.configBox {
-  position: fixed;
-  background-color: rgb(245, 245, 245);
-  width: 80vw;
-  height: 50vh;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  border-radius: 10px;
-  padding:40px;
-  box-sizing: border-box;
-  overflow: auto;
-  box-shadow: 0 0 17px rgb(170, 170, 170);
-}
-
-.inputBar {
-  min-height: 40px;
-  font-size: 30px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-}
-
-#coursesContainer {
-  display: grid;
-  margin: 20px 0;
-  grid-template-columns: repeat(auto-fit, minmax(max(200px, 30%), 1fr));
-  gap:20px;
-}
-
-.courseCard {
-  background-color: white;
-  border-top: 60px solid;
-  border-radius: 10px;
-  padding: 40px 20px 5px;
-  font-size: 3rem;
-  font-weight: 600;
-  overflow: hidden;
-  box-sizing: border-box;
-  box-shadow:0 0 7px rgba(0, 0, 0, 0.31);
+  max-width: 60px;
 }
 
 .courseNameBar {
   min-height: 50px;
   font-weight: 600;
-  width:100%;
-  font-size:3.5rem;
-  padding-top:30px;
+  width: 100%;
+  font-size: 3.5rem;
+  padding-top: 30px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   align-items: center;
-  color:white;
-  margin-bottom:20px;
-}
-
-.recordsContainer {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));;
-  gap:20px;
-  padding-bottom:20px;
-  justify-items: center;
-  
-}
-
-.recordCard {
-  min-width: 90px;
-  /* max-width:120px; */
-  text-align: center;
-  padding: 12px;
-  border-radius: 5px;
-  box-shadow:0 0 7px rgba(0, 0, 0, 0.31);
-  transition: all 1s;
-  cursor: pointer;
+  color: white;
+  margin-bottom: 20px;
 }
 
 .bigAttendance {
   text-align: right;
-  font-size:6rem;
+  font-size: 6rem;
   font-weight: 600;
 }
 
 .mediumAttendance {
   text-align: right;
-  font-size:1.8rem;
+  font-size: 1.8rem;
 }

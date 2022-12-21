@@ -1,31 +1,44 @@
-import React, { useContext, useEffect } from 'react'
-import PageContext from '../PageContext'
-import NewCourse from '../components/NewCourse'
-import EditCourse from '../components/EditCourse'
-import NewRecurring from '../components/NewRecurring'
+import React, { useContext, useEffect } from "react";
+import PageContext from "../PageContext";
+import NewCourse from "../components/NewCourse";
+import EditCourse from "../components/EditCourse";
+import NewRecurring from "../components/NewRecurring";
 
 function ConfigBox() {
+  const { screenPosition, setScreenPosition } = useContext(PageContext);
+  const { screen, setScreen } = useContext(PageContext);
 
-  
+  const handleReturn = () => {
+    const determineBack = () => {
+      if (screen === "OneNew") {
+        return "One";
+      }
+      if (screen === "OneEdit") {
+        return "One";
+      }
+      if (screen === "TwoNew") {
+        return "Two";
+      }
+    };
+    setScreen(determineBack());
+    setScreenPosition("full");
+  };
 
-  const determineBack = () => {
-    if (screen === 'OneNew') {return 'One'}
-    if (screen === 'OneEdit') {return 'One'}
-    if (screen === 'TwoNew') {return 'Two'}
-  }
-
-    const {screenPosition, setScreenPosition} = useContext(PageContext) 
-    const {screen, setScreen} = useContext(PageContext)
   return (
-      <>
-    <div className='configBox'>
-    <button className='configButton' style={{backgroundColor:'crimson'}} onClick={() => {setScreen(determineBack());setScreenPosition('full')}}>X</button>
-    {screen === 'OneNew' && <NewCourse />}
-    {screen === 'OneEdit' && <EditCourse />}
-    {screen === 'TwoNew' && <NewRecurring />}
+    <div className="config-box-container">
+      <div className="config-box-card">
+        {screen === "OneNew" && (
+          <NewCourse activities={{ return: handleReturn }} />
+        )}
+        {screen === "OneEdit" && (
+          <EditCourse activities={{ return: handleReturn }} />
+        )}
+        {screen === "TwoNew" && (
+          <NewRecurring activities={{ return: handleReturn }} />
+        )}
+      </div>
     </div>
-    </>
-  )
+  );
 }
 
-export default ConfigBox
+export default ConfigBox;
