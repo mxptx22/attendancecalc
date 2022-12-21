@@ -35,12 +35,12 @@ function CoursePreview() {
   useEffect(() => {}, [screen]);
 
   const retrieveData = () => {
-    const retrievedDataArray = courses.filter(
+    const retrievedCourseData = courses.find(
       (object) => object.courseId === selectedCourse
     );
-    setNewCourseColour(retrievedDataArray[0].colour);
-    setNewCourseId(retrievedDataArray[0].courseId);
-    setNewCourse(retrievedDataArray[0].name);
+    setNewCourseColour(retrievedCourseData.colour);
+    setNewCourseId(retrievedCourseData.courseId);
+    setNewCourse(retrievedCourseData.name);
     const retrievedEventArray = events
       .filter((object) => object.courseId === selectedCourse)
       .sort((a, b) => b.date.localeCompare(a.date));
@@ -193,30 +193,35 @@ function CoursePreview() {
   // HERE Go Custom Screens
   function AttendanceList() {
     return (
-      <div className="recordsContainer">
+      <div className="mt-8 flex flex-wrap w-full justify-between gap-2 md:gap-6 md:justify-start">
+        {/* margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit,
+        minmax(120px, 1fr)); gap: 20px; padding-bottom: 20px; justify-items:
+        center; */}
         {courseEvents.map(({ courseId, date, status, eventId }) => (
-          <div>
+          <div className="max-w-[45%] w-28 ">
             <div
-              className="recordCard"
+              // Here is the entry
+              onClick={() => markingAbsence(courseId, eventId)}
+              className="text-center p-1 rounded-sm transition-all duration-1000 cursor-pointer border shadow-sm"
               style={{
                 backgroundColor:
                   status != "Present" ? "lightcoral" : "palegreen",
+                borderColor: status != "Present" ? "crimson" : "green",
               }}>
-              <div onClick={() => markingAbsence(courseId, eventId)}>
-                <div>
-                  <b>{date}</b>
-                </div>
-                <div>___</div>
-                <div>{status}</div>
+              <div className="font-semibold text-gray-800">{date}</div>
+              <div className="pt-5 uppercase text-gray-700 text-xs font-light tracking-widest">
+                {status}
               </div>
             </div>
             <div
-              className="recordCard"
-              style={{ marginTop: "10px", backgroundColor: "gainsboro" }}
+              // Here is the deletion button
+              className="w-full flex justify-center cursor-pointer pb-3"
               onClick={() => {
                 deleteEvent(eventId);
               }}>
-              ✖
+              <div className="border border-gray-300 border-t-0 py-1 w-8 text-center rounded-b-md bg-gray-200">
+                ✖
+              </div>
             </div>
           </div>
         ))}
