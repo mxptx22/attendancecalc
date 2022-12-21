@@ -2,7 +2,7 @@
 
 ![Attendance Calc Screenshot](https://mxptx.site/assets/attendance-calc-1.b6b77345.png)
 
-## How Can I Try It?
+## How Can I Try It Out?
 
 > [Demo available here...](https://mxptx22.github.io/attendancecalc/)
 
