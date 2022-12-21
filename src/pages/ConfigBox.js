@@ -1,23 +1,28 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import PageContext from "../PageContext";
 import NewCourse from "../components/NewCourse";
 import EditCourse from "../components/EditCourse";
 import NewRecurring from "../components/NewRecurring";
 
 function ConfigBox() {
-  const { screenPosition, setScreenPosition } = useContext(PageContext);
+  // HERE Contexts
+  // Single
+  const { setScreenPosition } = useContext(PageContext);
+  // Duplets
   const { screen, setScreen } = useContext(PageContext);
 
+  // HERE Aux Functions
   const handleReturn = () => {
     const determineBack = () => {
-      if (screen === "OneNew") {
-        return "One";
-      }
-      if (screen === "OneEdit") {
-        return "One";
-      }
-      if (screen === "TwoNew") {
-        return "Two";
+      switch (screen) {
+        case "OneNew":
+          return "One";
+        case "OneEdit":
+          return "One";
+        case "TwoNew":
+          return "Two";
+        default:
+          throw new Error("Invalid screen selection...");
       }
     };
     setScreen(determineBack());

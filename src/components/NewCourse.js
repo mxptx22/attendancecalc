@@ -2,10 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import PageContext from "../PageContext";
 
 import { BiPaint } from "react-icons/bi";
-import {
-  MdOutlineCancelPresentation,
-  MdOutlineDoneOutline,
-} from "react-icons/md";
+import { MdOutlineDoneOutline } from "react-icons/md";
 import { IoMdExit } from "react-icons/io";
 
 function NewCourse({ activities }) {
@@ -42,7 +39,6 @@ function NewCourse({ activities }) {
         ...otherCourses,
         { courseId: newCourseId, name: newCourse, colour: newCourseColour },
       ]);
-      console.log(courses);
       setScreen("One");
       setScreenPosition("full");
     } else {
