@@ -38,14 +38,14 @@ function App() {
       {screen === "OneNew" && <ConfigBox />}
       {screen === "OneEdit" && <ConfigBox />}
       {screen === "TwoNew" && <ConfigBox />}
-      <div id="mainWindowContainer" ref={mainWindowDisplay}>
+      <div id="mainwindow-container" ref={mainWindowDisplay}>
         <div id="ceilling"></div>
         <div className="icon">
-          {screen === "One" && <div className="iconGraphics">📚</div>}
-          {screen === "Two" && <div className="iconGraphics">📓</div>}
-          {screen === "TwoNew" && <div className="iconGraphics">📓</div>}
-          {screen === "OneNew" && <div className="iconGraphics">📚</div>}
-          {screen === "OneEdit" && <div className="iconGraphics">📚</div>}
+          {screen === "One" && <div className="icon-graphics">📚</div>}
+          {screen === "Two" && <div className="icon-graphics">📓</div>}
+          {screen === "TwoNew" && <div className="icon-graphics">📓</div>}
+          {screen === "OneNew" && <div className="icon-graphics">📚</div>}
+          {screen === "OneEdit" && <div className="icon-graphics">📚</div>}
         </div>
         <div>
           <div
