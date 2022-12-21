@@ -5,14 +5,18 @@ import { BiPaint } from "react-icons/bi";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { IoMdExit } from "react-icons/io";
 
-function NewCourse({ activities }) {
-  const { screen, setScreen } = useContext(PageContext);
-  const { screenPosition, setScreenPosition } = useContext(PageContext);
+function EditCourse({ activities }) {
+  // HERE Contexts
+  // Single
+  const { setScreen } = useContext(PageContext);
+  const { setScreenPosition } = useContext(PageContext);
+  const { selectedCourse } = useContext(PageContext);
+
+  // Duplets
   const { courses, addCourses } = useContext(PageContext);
-  const [newCourse, setNewCourse] = useState("");
-  const [newCourseColour, setNewCourseColour] = useState("");
-  const [newCourseId, setNewCourseId] = useState();
-  const { selectedCourse, setSelectedCourse } = useContext(PageContext);
+
+  // HERE Aux Functions
+
   const availableColours = [
     "crimson",
     "springgreen",
@@ -28,40 +32,63 @@ function NewCourse({ activities }) {
     "lightgreen",
   ];
 
+  const randomizer = {
+    randomColour: (spontaneous) => {
+      const length = availableColours.length;
+      const colourIndex = Math.floor(Math.random() * length);
+      if (spontaneous) {
+        setThisCourseData({
+          ...thisCourseData,
+          colour: availableColours[colourIndex],
+        });
+      }
+      return availableColours[colourIndex];
+    },
+    randomId: () => {
+      return Math.floor(Math.random() * 10000000);
+    },
+  };
+
+  const [thisCourseData, setThisCourseData] = useState({
+    name: "",
+    colour: "",
+    id: "",
+  });
+
   useEffect(() => {
     retrieveData();
   }, []);
 
   const retrieveData = () => {
-    const retrievedDataArray = courses.filter(
+    const retrievedDataArray = courses.find(
       (object) => object.courseId === selectedCourse
     );
-    setNewCourseColour(retrievedDataArray[0].colour);
-    setNewCourseId(retrievedDataArray[0].courseId);
-    setNewCourse(retrievedDataArray[0].name);
+
+    setThisCourseData({
+      name: retrievedDataArray.name,
+      id: retrievedDataArray.courseId,
+      colour: retrievedDataArray.colour,
+    });
   };
 
   const editingCourse = () => {
-    if (newCourse !== "") {
+    if (thisCourseData.name.length > 0) {
       const edited = courses.map((obj) => {
         if (obj.courseId === selectedCourse) {
-          return { ...obj, name: newCourse, colour: newCourseColour };
+          return {
+            ...obj,
+            name: thisCourseData.name,
+            colour: thisCourseData.colour,
+          };
         }
         return obj;
       });
       addCourses(edited);
-      console.log(courses);
       setScreen("One");
       setScreenPosition("full");
     } else {
       alert("⚠️ You must give it a name.");
     }
-  };
-
-  const generateColour = () => {
-    const length = availableColours.length;
-    const colourIndex = Math.floor(Math.random() * length);
-    setNewCourseColour(availableColours[colourIndex]);
   };
 
   return (
@@ -86,7 +113,7 @@ function NewCourse({ activities }) {
             </button>
             <button
               onClick={() => {
-                generateColour();
+                randomizer.randomColour(true);
               }}
               className="subheader-button subheader-button-gray">
               <BiPaint className="text-lg" />
@@ -109,16 +136,18 @@ function NewCourse({ activities }) {
       <div>
         <input
           className="input-bar min-h-[40px] text-4xl w-full border-0 rounded-sm mt-4"
-          value={newCourse}
+          value={thisCourseData.name}
           style={{
             borderBottom: "10px solid",
-            borderBottomColor: newCourseColour,
+            borderBottomColor: thisCourseData.colour,
           }}
           minLength="1"
-          onInput={(e) => setNewCourse(e.target.value)}></input>
+          onInput={(e) =>
+            setThisCourseData({ ...thisCourseData, name: e.target.value })
+          }></input>
       </div>
     </div>
   );
 }
 
-export default NewCourse;
+export default EditCourse;

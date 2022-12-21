@@ -2,19 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import PageContext from "../PageContext";
 
 import { BiPaint } from "react-icons/bi";
-import {
-  MdOutlineCancelPresentation,
-  MdOutlineDoneOutline,
-} from "react-icons/md";
+import { MdOutlineDoneOutline } from "react-icons/md";
 import { IoMdExit } from "react-icons/io";
 
 function NewCourse({ activities }) {
-  const { screen, setScreen } = useContext(PageContext);
-  const { screenPosition, setScreenPosition } = useContext(PageContext);
+  // HERE Contexts
+  // Single
+  const { setScreen } = useContext(PageContext);
+  const { setScreenPosition } = useContext(PageContext);
+
+  // Duplets
   const { courses, addCourses } = useContext(PageContext);
-  const [newCourse, setNewCourse] = useState("");
-  const [newCourseColour, setNewCourseColour] = useState("");
-  const [newCourseId, setNewCourseId] = useState();
+
+  // HERE Aux Functions
   const availableColours = [
     "crimson",
     "springgreen",
@@ -30,35 +30,49 @@ function NewCourse({ activities }) {
     "lightgreen",
   ];
 
+  const randomizer = {
+    randomColour: (spontaneous) => {
+      const length = availableColours.length;
+      const colourIndex = Math.floor(Math.random() * length);
+      if (spontaneous) {
+        setNewCourseData({
+          ...newCourseData,
+          colour: availableColours[colourIndex],
+        });
+      }
+      return availableColours[colourIndex];
+    },
+    randomId: () => {
+      return Math.floor(Math.random() * 10000000);
+    },
+  };
+
+  const [newCourseData, setNewCourseData] = useState({
+    name: "",
+    colour: randomizer.randomColour(false),
+    id: randomizer.randomId(),
+  });
+
   useEffect(() => {
-    generateColour();
-    generateCourseId();
+    // FIXME Make it contingent on saving preferences
     localStorage.setItem("savedCourses", JSON.stringify(courses));
-  }, []);
+  }, [newCourseData]);
 
   const addingNewCourse = () => {
-    if (newCourse !== "") {
+    if (newCourseData.name.length > 0) {
       addCourses((otherCourses) => [
         ...otherCourses,
-        { courseId: newCourseId, name: newCourse, colour: newCourseColour },
+        {
+          courseId: newCourseData.id,
+          name: newCourseData.name,
+          colour: newCourseData.colour,
+        },
       ]);
-      console.log(courses);
       setScreen("One");
       setScreenPosition("full");
     } else {
       alert("⚠️ You must give it a name.");
     }
-  };
-
-  const generateColour = () => {
-    const length = availableColours.length;
-    const colourIndex = Math.floor(Math.random() * length);
-    setNewCourseColour(availableColours[colourIndex]);
-  };
-
-  const generateCourseId = () => {
-    const generatedCourseId = Math.floor(Math.random() * 10000000);
-    setNewCourseId(generatedCourseId);
   };
 
   return (
@@ -83,7 +97,7 @@ function NewCourse({ activities }) {
             </button>
             <button
               onClick={() => {
-                generateColour();
+                randomizer.randomColour(true);
               }}
               className="subheader-button subheader-button-gray">
               <BiPaint className="text-lg" />
@@ -109,10 +123,12 @@ function NewCourse({ activities }) {
           className="input-bar min-h-[40px] text-4xl w-full border-0 rounded-sm mt-4"
           style={{
             borderBottom: "10px solid",
-            borderBottomColor: newCourseColour,
+            borderBottomColor: newCourseData.colour,
           }}
           minLength="1"
-          onInput={(e) => setNewCourse(e.target.value)}></input>
+          onInput={(e) =>
+            setNewCourseData({ ...newCourseData, name: e.target.value })
+          }></input>
       </div>
     </div>
   );

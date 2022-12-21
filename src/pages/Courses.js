@@ -8,90 +8,70 @@ import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever, MdOutlineEditNote } from "react-icons/md";
 
 function Courses() {
-  const [savingSliderDefault, setSavingSliderDefault] = useState("start");
-  const { screenPosition, setScreenPosition } = useContext(PageContext);
-  const { screen, setScreen } = useContext(PageContext);
+  // HERE Contexts
+  // Single
+  const { setScreenPosition } = useContext(PageContext);
+  const { setScreen } = useContext(PageContext);
+  const { setSelectedCourse } = useContext(PageContext);
+  // Duplets
   const { courses, addCourses } = useContext(PageContext);
-  const { selectedCourse, setSelectedCourse } = useContext(PageContext);
   const { savingStatus, setSavingStatus } = useContext(PageContext);
 
+  // HERE Aux Functions
   const saveToggle = useRef();
 
-  function savingforLater() {
-    if (savingSliderDefault === "start") {
-      setSavingSliderDefault("end");
-      saveToggle.current.checked = true;
-      setSavingStatus("yas");
-      determineSaving("yas");
-      console.log("i ran saving for later");
-    } else {
-      setSavingSliderDefault("start");
-      saveToggle.current.checked = false;
-      setSavingStatus("nay");
-      localStorage.clear();
-      console.log("i abstained from saving for later");
-    }
-  }
+  // Permissibility regards localstorage (LS) saving - consent to saving data in LS API
 
-  function determineSaving(switcher) {
-    if (switcher === "yas") {
-      localStorage.setItem("saving", "yas");
-    }
-    if (switcher === "yas" && courses.length > 0) {
-      saveCourse();
-    }
-    if (switcher === "nay") {
-      localStorage.setItem("saving", "nay");
-    }
-  }
-
-  function processSaving() {
-    if (localStorage.getItem("saving") !== "yas") {
-      console.log("no course shall pass");
-    } else {
-      savingforLater();
-      console.log("i ran process saving");
-      const retrievedCourses = JSON.parse(localStorage.getItem("savedCourses"));
-
-      if (retrievedCourses !== null && courses.length === 0) {
-        addCourses(retrievedCourses);
-        console.log(
-          "i even ran adding courses from saved courses in localStorage"
-        );
-      }
-    }
-  }
-
-  function saveCourse() {
-    localStorage.setItem("savedCourses", JSON.stringify(courses));
-    console.log("i saved a course with savecourse");
-  }
-
+  // Permissibility - First Run -> Upon Launch of Component
   useEffect(() => {
-    processSaving();
-    console.log("processSaving was run on Effect");
+    // [1] Determining first - from LS itself - if LS even permissible
+    if (localStorage.getItem("saving") === "yas") {
+      setSavingStatus("yas");
+      saveToggle.current.checked = true;
+      let retrievedCourses = JSON.parse(localStorage.getItem("savedCourses"));
+
+      // [2] If so, whether to load anything from LS on first run
+      // Solange there's some to load (!null) and state hasn't received any just yet (length?)
+      retrievedCourses !== null &&
+        courses.length == 0 &&
+        addCourses(retrievedCourses);
+    }
   }, []);
 
-  useEffect(() => {
-    if (courses.length !== 0) {
-      if (savingStatus !== "yas") {
-        console.log("there will be no saving with saveCourse");
-        localStorage.clear();
-        // here is new
-      } else {
-        console.log(
-          "since you want saving, I added and ran savecourse into localStorage"
-        );
-        saveCourse();
-      }
+  // [L ONLY] Permissibility - Local Level Toggle
+  function optinToggle() {
+    if (savingStatus == "nay") {
+      localStorage.setItem("saving", "yas");
+      setSavingStatus("yas");
+      courses.length > 0 && saveCourseLS();
+      saveToggle.current.checked = true;
+    } else {
+      localStorage.clear();
+      setSavingStatus("nay");
+      saveToggle.current.checked = false;
     }
-  }, [courses]);
+  }
 
-  function deleteCourse(idToDelete) {
-    addCourses(courses.filter((item) => item.courseId !== idToDelete));
-    if (courses.length === 1) {
-      localStorage.removeItem("savedCourses");
+  // [LS ONLY] Permissibility & Content Management - LocalStorage Level
+  useEffect(() => {
+    // EACH CHANGE IN COURSES - If there are some courses (not 0) & you want (not) them saved locally >>
+    if (courses.length !== 0) {
+      savingStatus !== "yas" ? localStorage.clear() : saveCourseLS();
     }
+  }, [courses, savingStatus]);
+
+  function saveCourseLS() {
+    // Instance of Saving Courses in Local Storage - cs. addCourses which adds them locally without determination re localstorage
+    localStorage.setItem("savedCourses", JSON.stringify(courses));
+  }
+
+  // [L + LS] Content Management
+  function deleteCourse(idToDelete) {
+    // FIXME Think about filtering course events as well to limit the volume of redundant data
+    // [L ONLY] Instance of Removing Course on local level -> Will be reflected in LS w/ useEffect
+    addCourses(courses.filter((item) => item.courseId !== idToDelete));
+    // [LS ONLY] I made it so w/ useEffect that you need at least 1 course for it to engage if (courses.length !== 0) - don't know why but yeah - this is a clearfix for it
+    courses.length === 1 && localStorage.removeItem("savedCourses");
   }
 
   return (
@@ -122,7 +102,7 @@ function Courses() {
             <input
               ref={saveToggle}
               onClick={() => {
-                savingforLater();
+                optinToggle();
               }}
               type="checkbox"
               class="sr-only peer"
@@ -137,7 +117,7 @@ function Courses() {
 
       <div
         id="courses-container"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-6">
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-6 gap-4">
         {courses.map(({ name, colour, courseId }) => (
           <div
             className="relative course-card border-t-[2rem] rounded-md py-2 px-3 overflow-hidden bg-white border border-gray-300 shadow-sm"
