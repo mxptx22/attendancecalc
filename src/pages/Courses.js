@@ -117,7 +117,7 @@ function Courses() {
 
       <div
         id="courses-container"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-6">
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-6 gap-4">
         {courses.map(({ name, colour, courseId }) => (
           <div
             className="relative course-card border-t-[2rem] rounded-md py-2 px-3 overflow-hidden bg-white border border-gray-300 shadow-sm"

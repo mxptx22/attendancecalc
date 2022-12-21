@@ -229,8 +229,12 @@ function CoursePreview() {
                   status != "Present" ? "lightcoral" : "palegreen",
                 borderColor: status != "Present" ? "crimson" : "green",
               }}>
-              <div className="font-semibold text-gray-800">
-                {new Date(date).toLocaleDateString()}
+              <div className="font-semibold text-gray-800 font-medium">
+                {new Date(date).toLocaleDateString(undefined, {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
               </div>
               <div className="pt-5 uppercase text-gray-700 text-xs font-light tracking-widest">
                 {status}
