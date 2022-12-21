@@ -75,17 +75,6 @@ function CoursePreview() {
     retrieveData();
   };
 
-  function testingPrinter() {
-    // console.log(events)
-    // console.log(courseEvents)
-    // console.log(newDate)
-    // console.log('Present Days',countingPresent())
-    // console.log('Absent Days',countingAbsent())
-    // console.log('Total Days',countingTotal())
-    // console.log('Total Days',countingAttendance())
-    console.log(events.sort((a, b) => a.date.localeCompare(b.date)));
-  }
-
   const markingAbsence = (course, eventExamined) => {
     const edited = events.map((obj) => {
       if (obj.courseId === course && obj.eventId === eventExamined) {
@@ -139,73 +128,69 @@ function CoursePreview() {
   return (
     <div>
       <div
+        id="header"
         className="w-full py-4 border-b mb-2 flex justify-between items-center"
         style={{ borderBottomColor: newCourseColour }}>
-        <div id="part-1" className="text-5xl uppercase font-thin text-gray-400">
+        <h1 id="part-1" className="text-3xl md:text-5xl">
           {newCourse}
-        </div>
+        </h1>
         <div id="part-2">
-          {" "}
           <button
             onClick={() => {
               setScreen("One");
             }}
-            className="focus:outline-none text-gray-800 bg-gray-200 shadow-sm shadow-gray-300 hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 font-medium rounded-sm p-2.5 w-fit flex gap-1 items-center justify-center">
-            <IoMdExit className="text-4xl" />
+            className="yes-button yes-button-gray">
+            <IoMdExit className="" />
           </button>
         </div>
       </div>
 
-      <div className="w-full flex gap-2">
+      <div
+        id="controls"
+        className="w-full flex flex-col md:flex-row gap-2 mb-4">
         <div class="inline-flex items-center rounded-md shadow-sm">
           <input
             type="date"
             onInput={(e) => setNewDate(e.target.value)}
             class="focus:outline-none text-gray-800 text-base bg-white
             hover:bg-gray-200 border border-gray-200 rounded-l-sm px-2 py-0.5
-            inline-flex space-x-1 items-center"></input>
+            inline-flex space-x-1 items-center w-full md:w-fit"></input>
           <button
             onClick={() => {
               addingNewDate();
             }}
-            class=" text-gray-800 bg-white hover:bg-gray-100 border border-gray-200 rounded-r-sm px-2 py-1 inline-flex space-x-1 items-center gap-1">
-            <RiCalendarEventLine className="text-lg inline-block" />
+            className="context-button w-fit">
+            <RiCalendarEventLine className="inline-block" />
             <span className="uppercase font-thin text-base">Add Date</span>
           </button>
         </div>
-
         <button
           onClick={() => {
             setScreen("TwoNew");
             setScreenPosition("null");
           }}
-          class=" text-gray-800 bg-white hover:bg-gray-100 border border-gray-200 rounded-r-sm px-2 py-1 inline-flex space-x-1 items-center gap-1">
+          // to match inline-flex shadow...
+          className="context-button shadow-sm ">
           <FiRepeat className="text-base inline-block" />
           <span className="uppercase font-thin text-base">Add Recurring</span>
         </button>
       </div>
 
-      <div class="bigAttendance" style={{ color: newCourseColour }}>
-        {countingAttendance()}
+      <div id="contents" className="flex gap-2 flex-col-reverse md:flex-row">
+        {/* FIXME Stats & List - Icon + text in accent Colors */}
+        <div id="list" className="w-full">
+          <AttendanceList />
+        </div>
+        <div id="stats" className="w-1/3">
+          <AttendanceStats />
+        </div>
       </div>
-      <div class="mediumAttendance">
-        <span style={{ color: newCourseColour, fontWeight: "800" }}>
-          {countingPresent()}
-        </span>{" "}
-        Marked Present
-      </div>
-      <div class="mediumAttendance">
-        <span style={{ color: newCourseColour, fontWeight: "800" }}>
-          {countingAbsent()}
-        </span>{" "}
-        Marked Absent
-      </div>
-      <div class="mediumAttendance">
-        <span style={{ color: newCourseColour, fontWeight: "800" }}>
-          {countingTotal()}
-        </span>{" "}
-        in Total
-      </div>
+    </div>
+  );
+
+  // HERE Go Custom Screens
+  function AttendanceList() {
+    return (
       <div className="recordsContainer">
         {courseEvents.map(({ courseId, date, status, eventId }) => (
           <div>
@@ -234,8 +219,36 @@ function CoursePreview() {
           </div>
         ))}
       </div>
-    </div>
-  );
+    );
+  }
+
+  function AttendanceStats() {
+    return (
+      <>
+        <div class="bigAttendance" style={{ color: newCourseColour }}>
+          {countingAttendance()}
+        </div>
+        <div class="mediumAttendance">
+          <span style={{ color: newCourseColour, fontWeight: "800" }}>
+            {countingPresent()}
+          </span>{" "}
+          Marked Present
+        </div>
+        <div class="mediumAttendance">
+          <span style={{ color: newCourseColour, fontWeight: "800" }}>
+            {countingAbsent()}
+          </span>{" "}
+          Marked Absent
+        </div>
+        <div class="mediumAttendance">
+          <span style={{ color: newCourseColour, fontWeight: "800" }}>
+            {countingTotal()}
+          </span>{" "}
+          in Total
+        </div>
+      </>
+    );
+  }
 }
 
 export default CoursePreview;

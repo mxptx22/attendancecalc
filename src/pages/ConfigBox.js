@@ -25,8 +25,8 @@ function ConfigBox() {
   };
 
   return (
-    <>
-      <div className="configBox">
+    <div className="config-box-container">
+      <div className="config-box-card">
         {screen === "OneNew" && (
           <NewCourse activities={{ return: handleReturn }} />
         )}
@@ -37,7 +37,7 @@ function ConfigBox() {
           <NewRecurring activities={{ return: handleReturn }} />
         )}
       </div>
-    </>
+    </div>
   );
 }
 

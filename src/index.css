@@ -3,4 +3,53 @@
 @tailwind utilities;
 
 @layer base {
+  h1 {
+    @apply text-2xl md:text-4xl uppercase font-thin text-gray-400;
+  }
+
+  button {
+    @apply whitespace-nowrap;
+  }
+
+  .mobile-adjusted {
+    @apply hidden md:inline-block;
+  }
+}
+
+@layer components {
+  .yes-button {
+    @apply overflow-hidden text-2xl md:text-3xl w-10 md:w-12 aspect-square flex items-center justify-center rounded-sm p-1 md:p-2.5 shadow-sm focus:outline-none focus:ring-4;
+  }
+
+  .yes-button-gray {
+    @apply text-gray-800 bg-gray-200 shadow-gray-300 hover:bg-gray-300 focus:ring-gray-300;
+  }
+
+  .yes-button-green {
+    @apply text-white bg-emerald-600 shadow-emerald-400 hover:bg-emerald-800 focus:ring-emerald-300;
+  }
+
+  .context-button {
+    @apply w-full text-base md:text-lg md:w-fit whitespace-nowrap text-gray-800 bg-white hover:bg-gray-100 border border-gray-200 rounded-r-sm px-2 py-1 inline-flex space-x-1 justify-center items-center gap-1;
+  }
+
+  .subheader-button {
+    @apply uppercase font-light text-sm focus:outline-none shadow-sm  focus:ring-4  rounded-sm px-1.5 py-1 w-fit flex gap-1 items-center justify-center;
+  }
+
+  .subheader-button-green {
+    @apply text-white bg-emerald-600 shadow-emerald-400 hover:bg-emerald-800 focus:ring-emerald-300;
+  }
+
+  .subheader-button-gray {
+    @apply text-gray-800 bg-gray-200 shadow-gray-300 hover:bg-gray-300 focus:ring-gray-300;
+  }
+
+  .config-box-container {
+    @apply fixed top-0 w-screen h-screen flex justify-center items-start py-[10vh] md:py-[20vh];
+  }
+
+  .config-box-card {
+    @apply bg-gray-50 w-[95vw] md:w-[80vw] h-[70vh] md:h-[50vh] pb-[10vh] rounded-lg p-4 md:p-10 box-border overflow-auto shadow-md shadow-gray-300;
+  }
 }

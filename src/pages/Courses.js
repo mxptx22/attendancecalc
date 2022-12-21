@@ -101,8 +101,8 @@ function Courses() {
         className="flex justify-between items-center border-b py-3">
         <div id="part-1" className="flex flex-col gap-1 justify-center">
           <div className="px-2 py-0.5 box-content">
-            <h1 className="text-4xl uppercase font-thin text-gray-400">
-              Your Courses
+            <h1>
+              <span class="mobile-adjusted">Your</span> Courses
             </h1>
           </div>
           <div class="pl-1">

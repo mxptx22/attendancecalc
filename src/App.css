@@ -101,27 +101,6 @@ body {
   max-width: 60px;
 }
 
-.configBox {
-  position: fixed;
-  background-color: rgb(245, 245, 245);
-  width: 80vw;
-  height: 50vh;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  border-radius: 10px;
-  padding: 40px;
-  box-sizing: border-box;
-  overflow: auto;
-  box-shadow: 0 0 17px rgb(170, 170, 170);
-}
-
-#coursesContainer {
-  display: grid;
-  margin: 20px 0;
-  grid-template-columns: repeat(auto-fit, minmax(max(200px, 30%), 1fr));
-  gap: 20px;
-}
-
 .courseNameBar {
   min-height: 50px;
   font-weight: 600;

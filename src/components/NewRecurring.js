@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import PageContext from "../PageContext";
 import { BiAddToQueue } from "react-icons/bi";
 import { MdOutlineCancelPresentation } from "react-icons/md";
+import { IoMdExit } from "react-icons/io";
 
 function NewRecurring({ activities }) {
   const [startDate, setStartDate] = useState();
@@ -84,31 +85,37 @@ function NewRecurring({ activities }) {
         className="flex justify-between items-center border-b py-3">
         <div id="part-1" className="flex flex-col gap-1 justify-center">
           <div className="px-2 py-0.5 box-content">
-            <h1 className="text-4xl uppercase font-thin text-gray-400">
-              Add Recurring Events
+            <h1>
+              <span className="mobile-adjusted">Add</span> Recurring{" "}
+              <span className="mobile-adjusted">Events</span>
             </h1>
           </div>
           <div class="pl-1 flex gap-2">
-            {/* Discard */}
-
             <button
               onClick={() => {
-                activities.return();
+                recurrenceCalc();
               }}
-              className="focus:outline-none text-gray-800 bg-gray-200 shadow-sm shadow-gray-300 hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 font-medium rounded-sm px-1.5 py-1 w-fit flex gap-2 items-center justify-center">
-              <MdOutlineCancelPresentation className="text-lg" />
-              <span className="uppercase font-light text-sm">Discard</span>
+              className="subheader-button subheader-button-green">
+              <BiAddToQueue className="" />
+              <span className="">Add</span>
             </button>
           </div>
         </div>
         <div id="part-2">
           <button
             onClick={() => {
+              activities.return();
+            }}
+            className="yes-button yes-button-gray">
+            <IoMdExit className="" />
+          </button>
+          {/* <button
+            onClick={() => {
               recurrenceCalc();
             }}
-            className="focus:outline-none text-white bg-emerald-600 shadow-sm shadow-emerald-400 hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300 font-medium rounded-sm p-2.5 w-fit flex gap-1 items-center justify-center">
-            <BiAddToQueue className="text-4xl" />
-          </button>
+            className="yes-button yes-button-green">
+            <BiAddToQueue className="" />
+          </button> */}
         </div>
       </div>
       <div className="w-full text-center mt-12">
