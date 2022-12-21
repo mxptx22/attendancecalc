@@ -5,15 +5,11 @@ body {
   font-size: 1rem;
 }
 
-.separator {
-  height: 10px;
-}
-
 #ceilling {
   margin-top: 20vh;
 }
 
-#mainWindowContainer {
+#mainwindow-container {
   transition: all 1s;
 }
 
@@ -32,7 +28,7 @@ body {
   justify-content: center;
 }
 
-.iconGraphics {
+.icon-graphics {
   font-size: max(20vh, 10vw);
   position: absolute;
   bottom: 0;
@@ -47,81 +43,4 @@ body {
   border-radius: 50px 50px 0 0;
   height: 76vh;
   box-shadow: 0 -47px 100px rgb(170, 170, 170);
-}
-
-.configBar {
-  min-height: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-}
-
-.configBarItem {
-  display: inline-block;
-  height: 40px;
-  transition: all 2s;
-}
-
-.sliderBar {
-  background-color: rgb(186, 186, 186);
-  width: 80px;
-  display: flex;
-  border-radius: 40px;
-  display: flex;
-  transition: all 2s;
-  align-content: center;
-  box-shadow: 0 0 18px inset;
-}
-
-.sliderButton {
-  background-color: grey;
-  width: 40px;
-  transition: all 2s;
-  height: 40px;
-  border-radius: 40px;
-  box-shadow: 0 0 4px;
-}
-
-.configButton {
-  min-height: 40px;
-  border-radius: 5px;
-  font-weight: 800;
-  font-size: 1.2rem;
-  color: rgba(0, 0, 0, 0.6);
-  padding: 0 1rem;
-  /* border: 2px solid rgba(0, 0, 0, 0.6); */
-  border: none;
-  box-sizing: border-box;
-  cursor: pointer;
-  box-shadow: 0 0 4px;
-}
-
-.configDesc {
-  max-width: 60px;
-}
-
-.courseNameBar {
-  min-height: 50px;
-  font-weight: 600;
-  width: 100%;
-  font-size: 3.5rem;
-  padding-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  color: white;
-  margin-bottom: 20px;
-}
-
-.bigAttendance {
-  text-align: right;
-  font-size: 6rem;
-  font-weight: 600;
-}
-
-.mediumAttendance {
-  text-align: right;
-  font-size: 1.8rem;
 }
